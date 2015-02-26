@@ -1,0 +1,37 @@
+@(posts: java.util.List[Post])
+
+@main("Indignant Request") {
+    <script>
+    function del ( urlToDelete ) {
+    $.ajax ( {
+    url : urlToDelete,
+    type : 'DELETE',
+    success : function ( results ) {
+    // Refresh the page
+    location.reload ( ) ;
+    }
+    } ) ;
+    }
+    </script>
+
+    <h2>Recent post</h2>
+
+    <table class="table table-striped">
+        <tbody>
+        @for(post <- posts) {
+            <tr>
+                <td>
+                    <h3><a href="@routes.Posts.details(post.ean)">
+                    @post.title
+                    </a>
+                    </h3>
+                    <p>
+                    @post.text
+                    </p>
+                    <br/>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
